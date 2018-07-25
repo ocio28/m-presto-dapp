@@ -1,8 +1,13 @@
 import React, { Component } from 'react';
 import {CreateItem, ItemList} from './components'
+import MPrestoContract from './contracts/MPrestoContract'
 import './App.css';
 
 class App extends Component {
+  componentDidMount() {
+    new MPrestoContract()
+  }
+
   render() {
     return (
       <div className="container">

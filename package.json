@@ -4,6 +4,7 @@
   "author": "Andres Santande <https://t.me/ocio28>",
   "license": "MIT",
   "dependencies": {
+    "m-presto-contracts": "^0.1.1",
     "react": "^16.4.1",
     "react-dom": "^16.4.1"
   },
