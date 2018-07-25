@@ -21,6 +21,7 @@ export default class CreateItem extends Component {
       return
     }
 
+    this.props.onClick(name, parseInt(quantity, 10))
     console.log(this.state)
   }
 
@@ -38,7 +39,7 @@ export default class CreateItem extends Component {
               <label htmlFor="quantity">cantidad</label>
               <input id="quantity" className="form-control" onChange={this.onChange} value={this.state.quantity} required/>
             </div>
-            <button className="btn btn-primary btn-block">Crear</button>
+            <button className="btn btn-primary btn-block" disabled={this.props.laoding}>Crear</button>
           </form>
         </div>
       </div>

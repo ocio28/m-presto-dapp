@@ -1,11 +1,32 @@
 import React, { Component } from 'react';
 import {CreateItem, ItemList} from './components'
+import {init} from './lib/Eth'
 import MPrestoContract from './contracts/MPrestoContract'
 import './App.css';
 
 class App extends Component {
+  state = {
+    loading: false
+  }
+
   componentDidMount() {
-    new MPrestoContract()
+    if (init()) {
+      this._mpresto = new MPrestoContract()
+      this._mpresto.init()
+    } else {
+      console.log('no provider')
+    }
+  }
+
+  createItem = (name, quantity) => {
+    this.setState({loading: true})
+    this._mpresto.createItem(name, quantity).then(r => {
+      console.log('result', r)
+      this.setState({loading: false})
+    }).catch(e => {
+      console.error(e)
+      this.setState({loading: false})
+    })
   }
 
   render() {
@@ -18,7 +39,7 @@ class App extends Component {
         </div>
         <div className="row mb-3">
           <div className="col-md-12">
-            <CreateItem />
+            <CreateItem onClick={this.createItem} loading={this.state.loading}/>
           </div>
         </div>
         <div className="row mb-3">
