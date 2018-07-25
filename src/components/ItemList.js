@@ -22,13 +22,19 @@ export default class ItemList extends Component {
 }
 
 class Item extends Component {
+  state = {
+    name: '',
+    quantity: ''
+  }
   componentDidMount() {
-    mprestoContract.getItem(this.props.item).then(console.log).catch(console.error)
+    mprestoContract.getItem(this.props.item).then(result => {
+      this.setState({name: result.name, quantity: result.quantity})
+    }).catch(console.error)
   }
 
   render() {
     return (
-      <li className="list-group-item">Comic x 3</li>
+      <li className="list-group-item">{this.state.name} - Cantidad: {this.state.quantity}</li>
     )
   }
 }
