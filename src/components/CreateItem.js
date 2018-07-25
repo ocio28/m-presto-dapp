@@ -1,11 +1,13 @@
 import React, {Component} from 'react'
+import mprestoContract from '../contracts/MPrestoContract'
 
 //const $ = window.$
 
 export default class CreateItem extends Component {
   state = {
     name: '',
-    quantity: '0'
+    quantity: '0',
+    loading: false
   }
 
   onChange = (e) => {
@@ -21,8 +23,14 @@ export default class CreateItem extends Component {
       return
     }
 
-    this.props.onClick(name, parseInt(quantity, 10))
-    console.log(this.state)
+    this.setState({loading: true})
+    mprestoContract.createItem(name, parseInt(quantity, 10)).then(r => {
+      console.log('result', r)
+      this.setState({loading: false})
+    }).catch(e => {
+      console.error(e)
+      this.setState({loading: false})
+    })
   }
 
   render() {
@@ -39,7 +47,7 @@ export default class CreateItem extends Component {
               <label htmlFor="quantity">cantidad</label>
               <input id="quantity" className="form-control" onChange={this.onChange} value={this.state.quantity} required/>
             </div>
-            <button className="btn btn-primary btn-block" disabled={this.props.laoding}>Crear</button>
+            <button className="btn btn-primary btn-block" disabled={this.state.loading}>Crear</button>
           </form>
         </div>
       </div>

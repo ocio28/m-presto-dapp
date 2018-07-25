@@ -1,35 +1,33 @@
 import React, { Component } from 'react';
 import {CreateItem, ItemList} from './components'
-import {init} from './lib/Eth'
-import MPrestoContract from './contracts/MPrestoContract'
+import {init, getAccounts} from './lib/Eth'
+import mprestoContract from './contracts/MPrestoContract'
 import './App.css';
 
 class App extends Component {
   state = {
-    loading: false
+    account: '',
+    loading: true
   }
 
   componentDidMount() {
     if (init()) {
-      this._mpresto = new MPrestoContract()
-      this._mpresto.init()
+      mprestoContract.init().then(getAccounts).then(accounts => {
+        if (accounts.length === 0) return Promise.reject('No hay cuentas')
+        this.setState({account: accounts[0], loading: false})
+      }).catch(this.onError)
     } else {
-      console.log('no provider')
+      console.log('no provider, install metamask')
     }
   }
 
-  createItem = (name, quantity) => {
-    this.setState({loading: true})
-    this._mpresto.createItem(name, quantity).then(r => {
-      console.log('result', r)
-      this.setState({loading: false})
-    }).catch(e => {
-      console.error(e)
-      this.setState({loading: false})
-    })
+  onError = (e) => {
+    console.error(e)
+    this.setState({loading: false})
   }
 
   render() {
+    if (this.state.loading) return null
     return (
       <div className="container">
         <div className="row">
@@ -39,12 +37,12 @@ class App extends Component {
         </div>
         <div className="row mb-3">
           <div className="col-md-12">
-            <CreateItem onClick={this.createItem} loading={this.state.loading}/>
+            <CreateItem account={this.state.account} onError={this.onError}/>
           </div>
         </div>
         <div className="row mb-3">
           <div className="col-md-12">
-            <ItemList />
+            <ItemList account={this.state.account} onError={this.onError}/>
           </div>
         </div>
       </div>

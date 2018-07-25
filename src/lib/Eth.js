@@ -15,7 +15,6 @@ export function network() {
 }
 
 export function createContract(abi, address) {
-  console.log(web3.eth.accounts[0])
   return new web3.eth.Contract(abi, address)
 }
 

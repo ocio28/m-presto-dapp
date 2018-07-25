@@ -1,7 +1,7 @@
 import {MPresto} from 'm-presto-contracts'
 import {network, createContract, getAccounts} from '../lib/Eth'
 
-export default class MPrestoContract {
+class MPrestoContract {
   constructor() {
     this.contract = null
   }
@@ -14,20 +14,30 @@ export default class MPrestoContract {
     })
   }
 
+  getItem(_itemId) {
+    return this.contract.methods.items(_itemId).call()
+  }
+
   createItem(_name, _quantity) {
-    return getAccounts().then(accounts => {
-      if (accounts.length > 0) {
-        return this.contract.methods.createItem(_name, _quantity).send({from: accounts[0]})
-      }
-      return Promise.reject('No hay cuenta seleccionada')
+    return getAccounts().then(this._firstAccount).then(from => {
+        return this.contract.methods.createItem(_name, _quantity).send({from})
     })
   }
 
-  getItemsByOwner() {
-
+  getItemsByOwner(address) {
+    return this.contract.methods.getItemsByOwner(address).call()
   }
 
-  transfer() {
+  transfer(_to, _itemId) {
+    return getAccounts().then(this._firstAccount).then(from => {
+        return this.contract.methods.transfer(_to, _itemId).send({from})
+    })
+  }
 
+  _firstAccount = (accounts) => {
+    if (accounts.length === 0) return Promise.reject('No hay cuenta seleccionada')
+    return Promise.resolve(accounts[0])
   }
 }
+
+export default new MPrestoContract()
