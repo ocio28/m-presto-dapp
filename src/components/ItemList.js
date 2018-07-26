@@ -34,7 +34,15 @@ class Item extends Component {
 
   render() {
     return (
-      <li className="list-group-item">{this.state.name} - Cantidad: {this.state.quantity}</li>
+      <li className="list-group-item">
+        <div className="d-flex justify-content-between">
+          <div>
+            <h5>{this.state.name}</h5>
+            <small className="text-muted">Id: {this.props.item} Cantidad: {this.state.quantity}</small>
+          </div>
+          <button className="btn btn-success">Prestar</button>
+        </div>
+      </li>
     )
   }
 }
