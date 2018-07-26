@@ -23,7 +23,6 @@ export function getAccounts() {
 }
 
 export function hexToUtf8(hex) {
-  console.log(hex)
   return web3.utils.hexToUtf8(hex)
 }
 

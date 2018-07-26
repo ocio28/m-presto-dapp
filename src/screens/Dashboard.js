@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import {CreateItem, ItemList, Nickname} from '../components'
+import {CreateItem, ItemList, Nickname, TransferEvents} from '../components'
 import mprestoContract from '../contracts/MPrestoContract'
 
 export default class Dashboard extends Component {
@@ -42,6 +42,11 @@ export default class Dashboard extends Component {
         <div className="row mb-3">
           <div className="col-md-12">
             <ItemList account={this.props.account} items={this.state.items} onError={this.props.onError}/>
+          </div>
+        </div>
+        <div className="row mb-3">
+          <div className="col-md-12">
+            <TransferEvents account={this.props.account} onError={this.props.onError}/>
           </div>
         </div>
       </div>

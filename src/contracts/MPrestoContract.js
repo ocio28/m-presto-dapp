@@ -44,6 +44,20 @@ class MPrestoContract {
     })
   }
 
+  getTransferEvents = () => {
+    return getAccounts().then(this._firstAccount).then(from => {
+      return this.contract.getPastEvents('Transfer', {
+        filter: {_from: [from]},
+        fromBlock: 0,
+        toBlock: 'latest'
+      }).then(result => result.map(r => ({
+        from: r.returnValues._from,
+        to: r.returnValues._to,
+        itemId: r.returnValues._tokenId
+      })))
+    })
+  }
+
   _firstAccount = (accounts) => {
     if (accounts.length === 0) return Promise.reject('No hay cuenta seleccionada')
     return Promise.resolve(accounts[0])
