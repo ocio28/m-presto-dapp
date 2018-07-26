@@ -21,3 +21,12 @@ export function createContract(abi, address) {
 export function getAccounts() {
   return web3.eth.getAccounts()
 }
+
+export function hexToUtf8(hex) {
+  console.log(hex)
+  return web3.utils.hexToUtf8(hex)
+}
+
+export function asciiToHex(str) {
+  return web3.utils.asciiToHex(str)
+}

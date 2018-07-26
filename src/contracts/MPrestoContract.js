@@ -1,5 +1,5 @@
 import {MPresto} from 'm-presto-contracts'
-import {network, createContract, getAccounts} from '../lib/Eth'
+import {network, createContract, getAccounts, asciiToHex} from '../lib/Eth'
 
 class MPrestoContract {
   constructor() {
@@ -18,19 +18,29 @@ class MPrestoContract {
     return this.contract.methods.items(_itemId).call()
   }
 
+  getItemsByOwner(address) {
+    return this.contract.methods.getItemsByOwner(address).call()
+  }
+
+  getNickname(_address) {
+    return this.contract.methods.ownerNickname(_address).call()
+  }
+
   createItem(_name, _quantity) {
     return getAccounts().then(this._firstAccount).then(from => {
         return this.contract.methods.createItem(_name, _quantity).send({from})
     })
   }
 
-  getItemsByOwner(address) {
-    return this.contract.methods.getItemsByOwner(address).call()
-  }
-
   transfer(_to, _itemId) {
     return getAccounts().then(this._firstAccount).then(from => {
         return this.contract.methods.transfer(_to, _itemId).send({from})
+    })
+  }
+
+  setNickname(_nickname) {
+    return getAccounts().then(this._firstAccount).then(from => {
+      return this.contract.methods.setNickname(asciiToHex(_nickname)).send({from})
     })
   }
 

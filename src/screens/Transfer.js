@@ -18,10 +18,8 @@ export default class Transfer extends Component {
     }).catch(this.props.onError)
   }
 
-  onAddress = (e) => {
-    this.setState({address: e.target.value})
-  }
-
+  onAddress = (e) => this.setState({address: e.target.value})
+  
   transfer = (e) => {
     e.preventDefault()
     let address = this.state.address.trim()

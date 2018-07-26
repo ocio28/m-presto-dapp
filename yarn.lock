@@ -5120,9 +5120,9 @@ ltgt@~2.2.0:
   version "2.2.1"
   resolved "https://registry.yarnpkg.com/ltgt/-/ltgt-2.2.1.tgz#f35ca91c493f7b73da0e07495304f17b31f87ee5"
 
-m-presto-contracts@^0.1.1:
-  version "0.1.1"
-  resolved "https://registry.yarnpkg.com/m-presto-contracts/-/m-presto-contracts-0.1.1.tgz#d085cc3b4246659b9d9ad30b9134327b4719a587"
+m-presto-contracts@^0.2.0:
+  version "0.2.0"
+  resolved "https://registry.yarnpkg.com/m-presto-contracts/-/m-presto-contracts-0.2.0.tgz#38ede45369fce35c3008fe1edddc0a5857038ceb"
   dependencies:
     ganache-cli "^6.1.6"
     openzeppelin-solidity "1.11.0"
