@@ -4,19 +4,11 @@ import {TRANSFER} from '../utils/Routes'
 import mprestoContract from '../contracts/MPrestoContract'
 
 export default class ItemList extends Component {
-  state = {
-    items: []
-  }
-
-  componentDidMount() {
-    mprestoContract.getItemsByOwner(this.props.account).then(items => this.setState({items})).catch(this.props.onError)
-  }
-
   render() {
-    if (this.state.items.length === 0) return <Empty />
+    if (this.props.items.length === 0) return <Empty />
     return (
       <ul className="list-group">
-        {this.state.items.map((item, i) => (
+        {this.props.items.map((item, i) => (
           <Item key={i} item={item}/>
         ))}
       </ul>
