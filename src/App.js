@@ -1,5 +1,8 @@
 import React, { Component } from 'react';
-import {CreateItem, ItemList} from './components'
+import {HashRouter as Router, Route} from 'react-router-dom'
+import {DASHBOARD, TRANSFER} from './utils/Routes'
+import Dashboard from './screens/Dashboard'
+import Transfer from './screens/Transfer'
 import {init, getAccounts} from './lib/Eth'
 import mprestoContract from './contracts/MPrestoContract'
 import './App.css';
@@ -29,25 +32,18 @@ class App extends Component {
   render() {
     if (this.state.loading) return null
     return (
-      <div className="container">
-        <div className="row">
-          <div className="col-md-12 text-center">
-            <h1 className="display-3 text-light">MPresto!</h1>
-          </div>
+      <Router>
+        <div>
+          <PublicRoute exact path={DASHBOARD} component={Dashboard} account={this.state.account} onError={this.onError}/>
+          <PublicRoute path={TRANSFER} component={Transfer} account={this.state.account} onError={this.onError}/>
         </div>
-        <div className="row mb-3">
-          <div className="col-md-12">
-            <CreateItem account={this.state.account} onError={this.onError}/>
-          </div>
-        </div>
-        <div className="row mb-3">
-          <div className="col-md-12">
-            <ItemList account={this.state.account} onError={this.onError}/>
-          </div>
-        </div>
-      </div>
+      </Router>
     );
   }
 }
+
+const PublicRoute = ({ component: Component, ...rest }) => (
+  <Route {...rest} render={props => <Component {...props} {...rest}/>}/>
+);
 
 export default App;

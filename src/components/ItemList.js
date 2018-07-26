@@ -1,4 +1,6 @@
 import React, {Component} from 'react'
+import {Link} from 'react-router-dom'
+import {TRANSFER} from '../utils/Routes'
 import mprestoContract from '../contracts/MPrestoContract'
 
 export default class ItemList extends Component {
@@ -40,7 +42,7 @@ class Item extends Component {
             <h5>{this.state.name}</h5>
             <small className="text-muted">Id: {this.props.item} Cantidad: {this.state.quantity}</small>
           </div>
-          <button className="btn btn-success">Prestar</button>
+          <Link className="btn btn-success d-flex align-items-center" to={TRANSFER.replace(':id', this.props.item)}>Prestar</Link>
         </div>
       </li>
     )
