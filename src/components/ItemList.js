@@ -13,6 +13,7 @@ export default class ItemList extends Component {
   }
 
   render() {
+    if (this.state.items.length === 0) return <Empty />
     return (
       <ul className="list-group">
         {this.state.items.map((item, i) => (
@@ -22,6 +23,10 @@ export default class ItemList extends Component {
     )
   }
 }
+
+const Empty = () => (
+  <h3 className="text-light text-center">No tienes ningun objeto...</h3>
+)
 
 class Item extends Component {
   state = {
