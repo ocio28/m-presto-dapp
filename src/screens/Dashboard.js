@@ -24,16 +24,6 @@ export default class Dashboard extends Component {
   render() {
     return (
       <div className="container">
-        <div className="row">
-          <div className="col-md-12 text-center">
-            <h1 className="display-3 text-light">MPresto!</h1>
-          </div>
-        </div>
-        <div className="row mb-3">
-          <div className="col-md-12">
-            <Nickname account={this.props.account} onError={this.props.onError}/>
-          </div>
-        </div>
         <div className="row mb-3">
           <div className="col-md-12">
             <CreateItem account={this.props.account} onError={this.props.onError} onCreate={this.onCreate}/>
