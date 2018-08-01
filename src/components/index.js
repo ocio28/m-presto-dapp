@@ -1,7 +1,6 @@
-import CreateItem from './CreateItem'
-import ItemList from './ItemList'
+import Item from './Item'
 import TransferEvents from './TransferEvents'
 
 export {
-  CreateItem, ItemList, TransferEvents
+  Item, TransferEvents
 }

@@ -1,7 +1,13 @@
 .cs-header-margin {
-  margin-top: 70px;
+  margin-top: 60px;
 }
 
 .cs-primary-bg-color {
   background-color: #e67e22
+}
+
+.cs-fab {
+  width: 60px;
+  height: 60px;
+  border-radius: 100%;
 }

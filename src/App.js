@@ -1,8 +1,7 @@
 import React, { Component } from 'react';
 import {HashRouter as Router, Route} from 'react-router-dom'
-import {DASHBOARD, TRANSFER, HEADER} from './utils/Routes'
-import Dashboard from './screens/Dashboard'
-import Transfer from './screens/Transfer'
+import {DASHBOARD, TRANSFER, HEADER, CREATE_ITEM} from './utils/Routes'
+import {Dashboard, CreateItem, Transfer} from './screens'
 import Header from './components/Header'
 import {init, getAccounts} from './lib/Eth'
 import mprestoContract from './contracts/MPrestoContract'
@@ -41,6 +40,7 @@ class App extends Component {
           <div className="cs-header-margin">
             <div className={(this.state.width > 992 ? 'container' : '')}>
               <PublicRoute exact path={DASHBOARD} component={Dashboard} account={this.state.account} onError={this.onError}/>
+              <PublicRoute path={CREATE_ITEM} component={CreateItem} account={this.state.account} onError={this.onError}/>
               <PublicRoute path={TRANSFER} component={Transfer} account={this.state.account} onError={this.onError}/>
             </div>
           </div>
