@@ -17,16 +17,15 @@ export default class Item extends Component {
 
   render() {
     return (
-      <li className="list-group-item pr-0 pl-0">
-        <div className="d-flex justify-content-between">
-          <div>
+      <Link className="list-group-item list-group-item-action pr-0 pl-0" to={TRANSFER.replace(':id', this.props.item)}>
+        <div>
+          <div className="d-flex justify-content-between">
             <h4 className="mb-1">{this.state.name}</h4>
-            <p className="mb-1">Cantidad: {this.state.quantity}</p>
-            <small className="text-muted">id: {this.props.item}</small>
+            <small className="text-muted">{this.props.item}</small>
           </div>
-          <Link className="btn btn-success d-flex align-items-center" to={TRANSFER.replace(':id', this.props.item)}>Prestar</Link>
+          <p className="mb-1">Cantidad: {this.state.quantity}</p>
         </div>
-      </li>
+      </Link>
     )
   }
 }

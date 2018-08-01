@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import {CREATE_ITEM} from '../utils/Routes'
-import {Item, Nickname, TransferEvents} from '../components'
+import {Item} from '../components'
 import mprestoContract from '../contracts/MPrestoContract'
 
 export default class Dashboard extends Component {

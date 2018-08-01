@@ -1,5 +1,6 @@
 import React, {Component} from 'react'
 import {Link} from 'react-router-dom'
+import {TRANSFER_EVENTS} from '../utils/Routes'
 import mprestoContract from '../contracts/MPrestoContract'
 import {hexToUtf8} from '../lib/Eth'
 //import session from '../lib/Session'
@@ -47,6 +48,11 @@ export default class Header extends Component {
           <span className="navbar-toggler-icon"></span>
         </button>
         <div className="collapse navbar-collapse" id="navbarNav">
+          <ul className="navbar-nav">
+            <li className="nav-item active">
+              <Link className="nav-link" to={TRANSFER_EVENTS}>Prestados</Link>
+            </li>
+          </ul>
           <div className="ml-auto">
             {this.state.current.length === 0 || this.state.rename ?
               <NicknameForm current={this.state.current}

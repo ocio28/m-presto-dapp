@@ -1,6 +1,6 @@
 import Item from './Item'
-import TransferEvents from './TransferEvents'
+import Header from './Header'
 
 export {
-  Item, TransferEvents
+  Item, Header
 }

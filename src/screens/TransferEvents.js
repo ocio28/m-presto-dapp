@@ -15,8 +15,7 @@ export default class TransferEvents extends Component {
   render() {
     if (this.state.events.length === 0) return <h3 className="text-center">No existen prestamos...</h3>
     return (
-      <div>
-        <h3 className="text-light">Prestamos</h3>
+      <div className="p-2">
         <ul className="list-group">
           {this.state.events.map((event, i) => (
             <Item to={event.to} itemId={event.itemId} key={i}/>

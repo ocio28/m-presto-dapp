@@ -1,8 +1,9 @@
 import React, { Component } from 'react';
 import {HashRouter as Router, Route} from 'react-router-dom'
-import {DASHBOARD, TRANSFER, HEADER, CREATE_ITEM} from './utils/Routes'
-import {Dashboard, CreateItem, Transfer} from './screens'
-import Header from './components/Header'
+import {DASHBOARD, TRANSFER, HEADER, CREATE_ITEM,
+  TRANSFER_EVENTS} from './utils/Routes'
+import {Dashboard, CreateItem, Transfer, TransferEvents} from './screens'
+import {Header} from './components'
 import {init, getAccounts} from './lib/Eth'
 import mprestoContract from './contracts/MPrestoContract'
 import './App.css';
@@ -42,6 +43,7 @@ class App extends Component {
               <PublicRoute exact path={DASHBOARD} component={Dashboard} account={this.state.account} onError={this.onError}/>
               <PublicRoute path={CREATE_ITEM} component={CreateItem} account={this.state.account} onError={this.onError}/>
               <PublicRoute path={TRANSFER} component={Transfer} account={this.state.account} onError={this.onError}/>
+              <PublicRoute path={TRANSFER_EVENTS} component={TransferEvents} account={this.state.account} onError={this.onError}/>
             </div>
           </div>
         </div>
