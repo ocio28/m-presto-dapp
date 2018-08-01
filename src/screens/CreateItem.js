@@ -1,4 +1,6 @@
 import React, {Component} from 'react'
+import { connect } from 'react-redux'
+import {pushAlert} from '../actions'
 import {Link} from 'react-router-dom'
 import {DASHBOARD} from '../utils/Routes'
 import mprestoContract from '../contracts/MPrestoContract'
@@ -11,7 +13,7 @@ const initialState = {
   loading: false
 }
 
-export default class CreateItem extends Component {
+class CreateItem extends Component {
   state = {...initialState}
 
   submit = (e) => {
@@ -20,6 +22,7 @@ export default class CreateItem extends Component {
     this.setState({loading: true})
     mprestoContract.createItem(name, parseInt(quantity, 10)).then(r => {
       console.log('result', r)
+      this.props.pushAlert({type: 'success', message: 'Item creado con exito'})
       this.props.history.push(DASHBOARD)
     }).then(this.props.onCreate).catch(e => {
       console.error(e)
@@ -57,3 +60,9 @@ export default class CreateItem extends Component {
     )
   }
 }
+
+const mapDispatchToProps = dispatch => ({
+  pushAlert: alert => dispatch(pushAlert(alert))
+})
+
+export default connect(() => ({}), mapDispatchToProps)(CreateItem)

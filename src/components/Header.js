@@ -1,11 +1,13 @@
 import React, {Component} from 'react'
 import {Link} from 'react-router-dom'
-import {DASHBOARD, TRANSFER_EVENTS} from '../utils/Routes'
+import { connect } from 'react-redux'
+import {DASHBOARD, TRANSFER_EVENTS, ALERTS} from '../utils/Routes'
 import mprestoContract from '../contracts/MPrestoContract'
 import {hexToUtf8} from '../lib/Eth'
+import {fetchAlerts} from '../actions'
 //import session from '../lib/Session'
 
-export default class Header extends Component {
+class Header extends Component {
 /*  navigate = (to) => {
     window.$('#navbarNav').collapse('hide');
     if (to !== this.props.history.location.pathname) {
@@ -21,6 +23,7 @@ export default class Header extends Component {
 
   componentDidMount() {
     this._fetchNickname()
+    this.props.fetchAlerts()
   }
 
   assign = (nickname) => {
@@ -56,7 +59,15 @@ export default class Header extends Component {
               <Link className="nav-link" to={TRANSFER_EVENTS}>Prestados</Link>
             </li>
           </ul>
-          <div className="ml-auto">
+          <div className="ml-auto d-flex align-items-center">
+            <ul className="navbar-nav">
+              <li className="nav-item active">
+                <Link className="nav-link d-flex" to={ALERTS}>
+                  <small className="badge badge-pill badge-warning">{this.props.alerts.length}</small>
+                  <i className="fas fa-bell fa-lg mr-2"></i>
+                </Link>
+              </li>
+            </ul>
             {this.state.current.length === 0 || this.state.rename ?
               <NicknameForm current={this.state.current}
                 onSubmit={this.assign}
@@ -117,3 +128,13 @@ class NicknameForm extends Component {
     )
   }
 }
+
+const mapStateToProps = (state) => ({
+  alerts: state.alerts
+})
+
+const mapDispatchToProps = dispatch => ({
+  fetchAlerts: () => dispatch(fetchAlerts())
+})
+
+export default connect(mapStateToProps, mapDispatchToProps)(Header)
