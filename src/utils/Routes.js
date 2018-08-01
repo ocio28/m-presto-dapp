@@ -1,5 +1,4 @@
 export const HEADER = '/'
 export const DASHBOARD = '/'
 export const TRANSFER_EVENTS = '/transfer'
-export const TRANSFER = '/transfer/:id'
 export const CREATE_ITEM = '/items/create'

@@ -15,7 +15,6 @@ export default class TransferEvents extends Component {
 
   render() {
     if (this.state.events.length === 0) return <h3 className="text-center">No existen prestamos...</h3>
-    console.log(this.state.events)
     return (
       <div className="p-2">
         <ul className="list-group list-group-flush">

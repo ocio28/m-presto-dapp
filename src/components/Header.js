@@ -1,6 +1,6 @@
 import React, {Component} from 'react'
 import {Link} from 'react-router-dom'
-import {TRANSFER_EVENTS} from '../utils/Routes'
+import {DASHBOARD, TRANSFER_EVENTS} from '../utils/Routes'
 import mprestoContract from '../contracts/MPrestoContract'
 import {hexToUtf8} from '../lib/Eth'
 //import session from '../lib/Session'
@@ -42,13 +42,16 @@ export default class Header extends Component {
     //let path = this.props.history.location.pathname
     return (
       <nav className="navbar fixed-top navbar-expand-sm navbar-dark cs-primary-bg-color shadow-sm">
-        <Link className="navbar-brand" to="/">M-Presto</Link>
+        <Link className="navbar-brand" to={DASHBOARD}>M-Presto</Link>
         <button id="toggler" className="navbar-toggler" type="button" data-toggle="collapse"
           data-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
           <span className="navbar-toggler-icon"></span>
         </button>
         <div className="collapse navbar-collapse" id="navbarNav">
           <ul className="navbar-nav">
+            <li className="nav-item active">
+              <Link className="nav-link" to={DASHBOARD}>Items</Link>
+            </li>
             <li className="nav-item active">
               <Link className="nav-link" to={TRANSFER_EVENTS}>Prestados</Link>
             </li>
