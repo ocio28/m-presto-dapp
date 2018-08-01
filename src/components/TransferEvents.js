@@ -13,7 +13,7 @@ export default class TransferEvents extends Component {
   _setEvents = events => this.setState({events})
 
   render() {
-    if (this.state.events.length === 0) return <h3 className="text-light text-center">No existen prestamos...</h3>
+    if (this.state.events.length === 0) return <h3 className="text-center">No existen prestamos...</h3>
     return (
       <div>
         <h3 className="text-light">Prestamos</h3>

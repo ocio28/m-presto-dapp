@@ -23,20 +23,15 @@ export default class Dashboard extends Component {
 
   render() {
     return (
-      <div className="container">
+      <div className="p-2">
         <div className="row mb-3">
           <div className="col-md-12">
             <CreateItem account={this.props.account} onError={this.props.onError} onCreate={this.onCreate}/>
           </div>
         </div>
-        <div className="row mb-3">
+        <div className="row">
           <div className="col-md-12">
             <ItemList account={this.props.account} items={this.state.items} onError={this.props.onError}/>
-          </div>
-        </div>
-        <div className="row mb-3">
-          <div className="col-md-12">
-            <TransferEvents account={this.props.account} onError={this.props.onError}/>
           </div>
         </div>
       </div>

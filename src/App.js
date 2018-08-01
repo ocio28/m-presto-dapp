@@ -10,11 +10,13 @@ import './App.css';
 
 class App extends Component {
   state = {
+    width: window.innerWidth,
     account: '',
     loading: true
   }
 
   componentDidMount() {
+    window.onresize = () => this.setState({width: window.innerWidth})
     if (init()) {
       mprestoContract.init().then(getAccounts).then(accounts => {
         if (accounts.length === 0) return Promise.reject('No hay cuentas')
@@ -37,8 +39,10 @@ class App extends Component {
         <div>
           <PublicRoute path={HEADER} component={Header} account={this.state.account} onError={this.onError}/>
           <div className="cs-header-margin">
-            <PublicRoute exact path={DASHBOARD} component={Dashboard} account={this.state.account} onError={this.onError}/>
-            <PublicRoute path={TRANSFER} component={Transfer} account={this.state.account} onError={this.onError}/>
+            <div className={(this.state.width > 992 ? 'container' : '')}>
+              <PublicRoute exact path={DASHBOARD} component={Dashboard} account={this.state.account} onError={this.onError}/>
+              <PublicRoute path={TRANSFER} component={Transfer} account={this.state.account} onError={this.onError}/>
+            </div>
           </div>
         </div>
       </Router>

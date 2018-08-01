@@ -40,7 +40,7 @@ export default class Header extends Component {
   render() {
     //let path = this.props.history.location.pathname
     return (
-      <nav className="navbar fixed-top navbar-expand-lg navbar-dark cs-primary-bg-color shadow-sm">
+      <nav className="navbar fixed-top navbar-expand-sm navbar-dark cs-primary-bg-color shadow-sm">
         <Link className="navbar-brand" to="/">M-Presto</Link>
         <button id="toggler" className="navbar-toggler" type="button" data-toggle="collapse"
           data-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
@@ -76,12 +76,16 @@ class NicknameForm extends Component {
 
   _onSubmit = (e) => {
     e.preventDefault()
-    this.props.onSubmit(this.state.nickname.trim())
+    let nickname = this.state.nickname.trim()
+    if (nickname.length > 30) {
+      nickname = nickname.substring(0, 30)
+    }
+    this.props.onSubmit(nickname)
   }
 
   _disabled = () =>
     this.state.nickname.trim().length === 0 ||
-    this.state.nickname.trim().length > 33
+    this.state.nickname.trim().length > 30
 
   render() {
     let current = this.props.current
@@ -90,11 +94,11 @@ class NicknameForm extends Component {
         <div className="input-group mr-sm-2">
           <div className="input-group-prepend">
             <button className="btn btn-secondary" type="button" onClick={this.props.back}>
-              <i className="fal fa-arrow-alt-left"></i>
+              <i className="fal fa-arrow-alt-left" disabled={current.length === 0}></i>
             </button>
           </div>
-          <input maxLength="33" className="form-control"
-            placeholder={current.length === 0 ?  "Máximo 32 caracteres" : current}
+          <input maxLength="30" className="form-control"
+            placeholder={current.length === 0 ?  "Máximo 30 caracteres" : current}
             value={this.state.nickname}
             onChange={e => this.setState({nickname: e.target.value})}/>
         </div>

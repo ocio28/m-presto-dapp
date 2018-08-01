@@ -36,21 +36,18 @@ export default class CreateItem extends Component {
 
   render() {
     return (
-      <div className="card">
-        <div className="card-body">
-          <h4>Crear nuevo objeto</h4>
-          <form onSubmit={this.submit}>
-            <div className="form-group">
-              <label htmlFor="name">Nombre</label>
-              <input id="name" className="form-control" onChange={this.onChange} value={this.state.name} required/>
-            </div>
-            <div className="form-group">
-              <label htmlFor="quantity">cantidad</label>
-              <input id="quantity" className="form-control" onChange={this.onChange} value={this.state.quantity} required/>
-            </div>
-            <button className="btn btn-primary btn-block" disabled={this._disabled()}>Crear</button>
-          </form>
-        </div>
+      <div>
+        <form onSubmit={this.submit}>
+          <div className="form-group">
+            <label htmlFor="name">Nombre</label>
+            <input id="name" className="form-control" onChange={this.onChange} value={this.state.name} required/>
+          </div>
+          <div className="form-group">
+            <label htmlFor="quantity">Cantidad</label>
+            <input id="quantity" className="form-control" onChange={this.onChange} value={this.state.quantity} required/>
+          </div>
+          <button className="btn btn-primary btn-block" disabled={this._disabled()}><i className="far fa-plus"></i></button>
+        </form>
       </div>
     )
   }
