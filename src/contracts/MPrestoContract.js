@@ -15,7 +15,7 @@ class MPrestoContract {
   }
 
   getItem(_itemId) {
-    return this.contract.methods.items(_itemId).call()
+    return this.contract.methods.getItem(_itemId).call()
   }
 
   getItemsByOwner(address) {
