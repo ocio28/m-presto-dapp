@@ -4,22 +4,16 @@ import {removeAlert} from '../actions'
 
 class Alerts extends Component {
   render() {
+    if (this.props.alerts.length === 0) return <Empty />
     return (
       <div className="p-2">
-        <AlertList alerts={this.props.alerts} />
+        <ul className="list-group list-group-flush">
+          {this.props.alerts.map((alert, i) =>
+            <Alert key={i} alert={alert} onRemove={() => this.props.removeAlert(i)} />)}
+        </ul>
       </div>
     );
   }
-}
-
-const AlertList = ({alerts, onRemove}) => {
-  if (alerts.length === 0) return <Empty />
-  return (
-    <ul className="list-group list-group-flush">
-      {alerts.map((alert, i) =>
-        <Alert key={i} alert={alert} onRemove={() => onRemove(i)}/>)}
-    </ul>
-  )
 }
 
 const Alert = ({alert, onRemove}) => (
