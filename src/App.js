@@ -11,7 +11,8 @@ class App extends Component {
   state = {
     width: window.innerWidth,
     account: '',
-    loading: true
+    loading: true,
+    web3: false
   }
 
   componentDidMount() {
@@ -19,9 +20,10 @@ class App extends Component {
     if (init()) {
       mprestoContract.init().then(getAccounts).then(accounts => {
         if (accounts.length === 0) return Promise.reject('No hay cuentas')
-        this.setState({account: accounts[0], loading: false})
+        this.setState({account: accounts[0], loading: false, web3: true})
       }).catch(this.onError)
     } else {
+      this.setState({loading: false})
       console.log('no provider, install metamask')
     }
   }
@@ -33,6 +35,7 @@ class App extends Component {
 
   render() {
     if (this.state.loading) return null
+    if (!this.state.web3) return <NoWeb3 />
     return (
       <Router>
         <div>
@@ -50,6 +53,17 @@ class App extends Component {
     );
   }
 }
+
+const NoWeb3 = () => (
+  <div className="container text-center mt-3">
+    <div className="card">
+      <div className="card-body">
+        MPresto requiere <a href="https://metamask.io/" target="_blank">Metamask (Escritorio)</a>
+        o <a href="https://www.cipherbrowser.com/" target="_blank">Cipherbrowser (Celular)</a>
+      </div>
+    </div>
+  </div>
+)
 
 const PublicRoute = ({ component: Component, ...rest }) => (
   <Route {...rest} render={props => <Component {...props} {...rest}/>}/>

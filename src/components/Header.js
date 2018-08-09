@@ -63,8 +63,10 @@ class Header extends Component {
             <ul className="navbar-nav">
               <li className="nav-item active">
                 <Link className="nav-link d-flex" to={ALERTS}>
-                  <small className="badge badge-pill badge-warning">{this.props.alerts.length}</small>
-                  <i className="fas fa-bell fa-lg mr-2"></i>
+                  <div className="nav-alerts-icon">
+                    <small className="badge badge-pill badge-warning">{this.props.alerts.length}</small>
+                    <i className="fas fa-bell fa-lg mr-2"></i>
+                  </div>
                 </Link>
               </li>
             </ul>

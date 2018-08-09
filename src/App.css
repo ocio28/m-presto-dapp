@@ -11,3 +11,9 @@
   height: 60px;
   border-radius: 100%;
 }
+
+.nav-alerts-icon .badge {
+  position: relative;
+  left: 30px;
+  bottom: 10px;
+}
