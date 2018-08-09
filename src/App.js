@@ -58,8 +58,8 @@ const NoWeb3 = () => (
   <div className="container text-center mt-3">
     <div className="card">
       <div className="card-body">
-        MPresto requiere <a href="https://metamask.io/" target="_blank">Metamask (Escritorio)</a>
-        o <a href="https://www.cipherbrowser.com/" target="_blank">Cipherbrowser (Celular)</a>
+        MPresto requiere <a href="https://metamask.io/" target="_blank" rel="noopener noreferrer">Metamask (Escritorio)</a>
+        o <a href="https://www.cipherbrowser.com/" target="_blank" rel="noopener noreferrer">Cipherbrowser (Celular)</a>
       </div>
     </div>
   </div>
