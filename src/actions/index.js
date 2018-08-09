@@ -26,7 +26,6 @@ const KEY = 'mpresto-alerts'
 function fetchFromLocal() {
   if (!window.localStorage) return []
   let alerts = JSON.parse(window.localStorage.getItem(KEY), 'utf-8')
-  console.log(alerts)
   return alerts !== null ? alerts : []
 }
 
