@@ -60,7 +60,7 @@ class Header extends Component {
             </li>
           </ul>
           <div className="ml-auto d-flex align-items-center">
-            <ul className="navbar-nav">
+            <ul className="navbar-nav mr-2">
               <li className="nav-item active">
                 <Link className="nav-link d-flex" to={ALERTS}>
                   <div className="nav-alerts-icon">
@@ -69,15 +69,17 @@ class Header extends Component {
                   </div>
                 </Link>
               </li>
+              <li className="nav-item">
+                {this.state.current.length === 0 || this.state.rename ?
+                  <NicknameForm current={this.state.current}
+                    onSubmit={this.assign}
+                    back={() => this.setState({rename: false})}
+                    loading={this.state.loading}/>
+                :
+                  <Nickname nickname={this.state.current} onClick={() => this.setState({rename: true})}/>
+                }
+              </li>
             </ul>
-            {this.state.current.length === 0 || this.state.rename ?
-              <NicknameForm current={this.state.current}
-                onSubmit={this.assign}
-                back={() => this.setState({rename: false})}
-                loading={this.state.loading}/>
-            :
-              <Nickname nickname={this.state.current} onClick={() => this.setState({rename: true})}/>
-            }
           </div>
         </div>
       </nav>

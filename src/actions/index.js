@@ -8,7 +8,6 @@ export function fetchAlerts() {
 }
 
 export function pushAlert(alert) {
-  saveToLocal(alert)
   return {
     type: types.PUSH_ALERT,
     alert
@@ -31,8 +30,7 @@ function fetchFromLocal() {
   return alerts !== null ? alerts : []
 }
 
-function saveToLocal(alert) {
+export function stateToLocal(state) {
   if (!window.localStorage) return
-  let alerts = fetchFromLocal()
-  window.localStorage.setItem(KEY, JSON.stringify([...alerts, alert]))
+  window.localStorage.setItem(KEY, JSON.stringify(state))
 }

@@ -1,8 +1,15 @@
-/*export function createReducer(initialState, handlers) {
-  return (state = initialState, action) => (
-    handlers.hasOwnProperty(action.type) ? andlers[action.type](state, action) : state
-  )
-}*/
+import * as types from '../actions/Types'
+import {stateToLocal} from '../actions'
 
-export default (initialState, handlers) => (state = initialState, action) =>
-  handlers.hasOwnProperty(action.type) ? handlers[action.type](state, action) : state
+const saveState = {
+  [types.REMOVE_ALERT]: (state) => stateToLocal(state),
+  [types.PUSH_ALERT]: (state) => stateToLocal(state)
+}
+
+export default (initialState, handlers) => (state = initialState, action) => {
+  let newState = handlers.hasOwnProperty(action.type) ? handlers[action.type](state, action) : state
+  if (saveState.hasOwnProperty(action.type)) {
+    saveState[action.type](newState)
+  }
+  return newState
+}
