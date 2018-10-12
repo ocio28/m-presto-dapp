@@ -10,7 +10,7 @@ class MPrestoContract {
     return network().then(network => {
       let artifact = MPresto.v1
       this.contract = createContract(artifact.abi, MPresto.v1.networks[network].address)
-      return Promise.resolve(this)
+      return this
     })
   }
 

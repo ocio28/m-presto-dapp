@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import {HashRouter as Router, Route} from 'react-router-dom'
-import {DASHBOARD, HEADER, CREATE_ITEM, TRANSFER_EVENTS, ALERTS} from './utils/Routes'
-import {Dashboard, CreateItem, TransferEvents, Alerts} from './screens'
+import {DASHBOARD, HEADER, CREATE_ITEM, TRANSFER_EVENTS, ALERTS, PROFILE} from './utils/Routes'
+import {Dashboard, CreateItem, TransferEvents, Alerts, Profile} from './screens'
 import {Header} from './components'
 import {init, getAccounts} from './lib/Eth'
 import mprestoContract from './contracts/MPrestoContract'
@@ -45,6 +45,7 @@ class App extends Component {
               <PublicRoute exact path={DASHBOARD} component={Dashboard} account={this.state.account} onError={this.onError}/>
               <PublicRoute path={CREATE_ITEM} component={CreateItem} account={this.state.account} onError={this.onError}/>
               <PublicRoute exact path={TRANSFER_EVENTS} component={TransferEvents} account={this.state.account} onError={this.onError}/>
+              <PublicRoute path={PROFILE} component={Profile} account={this.state.account} />
               <PublicRoute path={ALERTS} component={Alerts} />
             </div>
           </div>
@@ -58,7 +59,7 @@ const NoWeb3 = () => (
   <div className="container text-center mt-3">
     <div className="card">
       <div className="card-body">
-        MPresto requiere <a href="https://metamask.io/" target="_blank" rel="noopener noreferrer">Metamask (Escritorio)</a>
+        MPresto requiere <a href="https://metamask.io/" target="_blank" rel="noopener noreferrer">Metamask (Escritorio) </a>
         o <a href="https://www.cipherbrowser.com/" target="_blank" rel="noopener noreferrer">Cipherbrowser (Celular)</a>
       </div>
     </div>

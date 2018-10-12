@@ -16,4 +16,12 @@ const alerts = createReducer([], {
   [types.PUSH_ALERT]: stateToLocal
 })
 
-export default combineReducers({alerts})
+const ProfileInitialState = {
+  nickname: ''
+}
+
+const profile = createReducer(ProfileInitialState, {
+  [types.SET_NICKNAME]: (state, action) => ({...state, nickname: action.nickname})
+})
+
+export default combineReducers({alerts, profile})
