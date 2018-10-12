@@ -1,7 +1,8 @@
 import React, { Component } from 'react';
 import {HashRouter as Router, Route} from 'react-router-dom'
-import {DASHBOARD, HEADER, CREATE_ITEM, TRANSFER_EVENTS, ALERTS, PROFILE} from './utils/Routes'
-import {Dashboard, CreateItem, TransferEvents, Alerts, Profile} from './screens'
+import {DASHBOARD, HEADER, CREATE_ITEM, TRANSFER_EVENTS, ALERTS, PROFILE,
+  ITEM} from './utils/Routes'
+import {Dashboard, CreateItem, TransferEvents, Alerts, Profile, ItemDetail} from './screens'
 import {Header} from './components'
 import {init, getAccounts} from './lib/Eth'
 import mprestoContract from './contracts/MPrestoContract'
@@ -43,6 +44,7 @@ class App extends Component {
           <div className="cs-header-margin">
             <div className={(this.state.width > 992 ? 'container' : '')}>
               <PublicRoute exact path={DASHBOARD} component={Dashboard} account={this.state.account} onError={this.onError}/>
+              <PublicRoute path={ITEM} component={ItemDetail} />
               <PublicRoute path={CREATE_ITEM} component={CreateItem} account={this.state.account} onError={this.onError}/>
               <PublicRoute exact path={TRANSFER_EVENTS} component={TransferEvents} account={this.state.account} onError={this.onError}/>
               <PublicRoute path={PROFILE} component={Profile} account={this.state.account} />

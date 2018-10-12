@@ -2,10 +2,7 @@ import React, {Component} from 'react'
 import {Link} from 'react-router-dom'
 import { connect } from 'react-redux'
 import {DASHBOARD, TRANSFER_EVENTS, ALERTS, PROFILE} from '../utils/Routes'
-import mprestoContract from '../contracts/MPrestoContract'
-import {hexToUtf8} from '../lib/Eth'
 import {fetchAlerts, fetchNickname} from '../actions'
-//import session from '../lib/Session'
 
 class Header extends Component {
 /*  navigate = (to) => {
@@ -25,7 +22,7 @@ class Header extends Component {
   }
 
   render() {
-    //let path = this.props.history.location.pathname
+    let path = this.props.history.location.pathname
     return (
       <nav className="navbar fixed-top navbar-expand-sm navbar-dark cs-primary-bg-color shadow-sm">
         <Link className="navbar-brand" to={DASHBOARD}>M-Presto</Link>
@@ -35,12 +32,8 @@ class Header extends Component {
         </button>
         <div className="collapse navbar-collapse" id="navbarNav">
           <ul className="navbar-nav">
-            <li className="nav-item active">
-              <Link className="nav-link" to={DASHBOARD}>Colección</Link>
-            </li>
-            <li className="nav-item active">
-              <Link className="nav-link" to={TRANSFER_EVENTS}>Prestados</Link>
-            </li>
+            <MenuItem to={DASHBOARD} label="Colección" path={path}/>
+            <MenuItem to={TRANSFER_EVENTS} label="Prestados" path={path}/>
           </ul>
           <div className="ml-auto d-flex align-items-center">
             <ul className="navbar-nav mr-2">
@@ -62,6 +55,12 @@ class Header extends Component {
     )
   }
 }
+
+const MenuItem = ({to, label, path}) => (
+  <li className={"nav-item" + (path === to ? " active" : "")}>
+    <Link className="nav-link" to={to}>{label}</Link>
+  </li>
+)
 
 const Nickname = ({nickname, onClick}) => (
   <Link className="btn btn-outline-light" to={PROFILE} onClick={onClick}>
