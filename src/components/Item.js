@@ -27,15 +27,15 @@ export default class Item extends Component {
     })
   }
 
-  _toggle = (e) => {
+  itemDetail = (e) => {
     e.preventDefault()
-    this.setState({show: !this.state.show})
+    
   }
 
   render() {
     return (
       <li className="list-group-item pr-0 pl-0">
-        <a href="" className="list-group-item-action" onClick={this._toggle} disabled={this.state.loading}>
+        <a href="" className="list-group-item-action" onClick={this.itemDetail} disabled={this.state.loading}>
           <div className="d-flex justify-content-between">
             <h4 className="mb-1">{this.state.name}</h4>
             <small className="text-muted">{this.props.item}</small>
