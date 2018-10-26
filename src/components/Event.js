@@ -30,15 +30,15 @@ export default class Event extends Component {
 
   render() {
     return (
-      <li className="list-group-item">
-        <a href="" className="list-group-item-action" onClick={this._toggle}>
+      <li className="list-group-item cs-pointer" onClick={this._toggle}>
+        <div className="list-group-item-action">
           <div className="d-flex justify-content-between">
             <h4 className="mb-1">{this.state.name}</h4>
             <small className="text-muted">{this.props.event.itemId}</small>
           </div>
           <p className="mb-1">Prestado a <strong>"{this.state.nickname}"</strong></p>
           <small className="text-muted">Cantidad: {this.state.quantity}</small>
-        </a>
+        </div>
         {this.state.show ? <Address address={this.state.owner} /> : null}
       </li>
     )

@@ -16,6 +16,14 @@ export default class Dashboard extends Component {
     this.props.history.push(CREATE_ITEM)
   }
 
+  navigate = (to) => {
+    if (to !== this.props.history.location.pathname) {
+      this.props.history.push(to)
+    } else {
+      window.location.reload()
+    }
+  }
+
   _fetchItems = () => mprestoContract
     .getItemsByOwner(this.props.account)
     .then(items => this.setState({items}))
@@ -24,7 +32,7 @@ export default class Dashboard extends Component {
   render() {
     return (
       <div className="p-2">
-        <ItemList items={this.state.items} onRefresh={this._fetchItems}/>
+        <ItemList items={this.state.items} onRefresh={this._fetchItems} navigate={this.navigate}/>
         <div className="fixed-bottom d-flex justify-content-end">
           <button className="btn btn-primary cs-fab mr-4 mb-4" type="button" onClick={this.createOrder}>
             <i className="fal fa-plus fa-2x"></i>
@@ -35,11 +43,11 @@ export default class Dashboard extends Component {
   }
 }
 
-const ItemList = ({items, onRefresh}) => {
+const ItemList = ({items, onRefresh, navigate}) => {
   if (items.length === 0) return <Empty />
   return (
     <ul className="list-group list-group-flush">
-      {items.map((item, i) => <Item key={i} item={item} onRefresh={onRefresh}/>)}
+      {items.map((item, i) => <Item key={i} item={item} onRefresh={onRefresh} navigate={navigate}/>)}
     </ul>
   )
 }
