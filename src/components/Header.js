@@ -5,15 +5,17 @@ import {DASHBOARD, TRANSFER_EVENTS, ALERTS, PROFILE} from '../utils/Routes'
 import {fetchAlerts, fetchNickname} from '../actions'
 
 class Header extends Component {
-/*  navigate = (to) => {
+  state = {
+    loading: true
+  }
+
+  navigate = (to) => {
     window.$('#navbarNav').collapse('hide');
     if (to !== this.props.history.location.pathname) {
       this.props.history.push(to)
+    } else {
+      window.location.reload()
     }
-  }*/
-
-  state = {
-    loading: true
   }
 
   componentDidMount() {
@@ -32,13 +34,13 @@ class Header extends Component {
         </button>
         <div className="collapse navbar-collapse" id="navbarNav">
           <ul className="navbar-nav">
-            <MenuItem to={DASHBOARD} label="Colección" path={path}/>
-            <MenuItem to={TRANSFER_EVENTS} label="Prestados" path={path}/>
+            <MenuItem to={DASHBOARD} label="Colección" path={path} navigate={this.navigate}/>
+            <MenuItem to={TRANSFER_EVENTS} label="Prestados" path={path} navigate={this.navigate}/>
           </ul>
           <div className="ml-auto d-flex align-items-center">
             <ul className="navbar-nav mr-2">
               <li className="nav-item">
-                {this.state.loading ? null : <Nickname nickname={this.props.nickname} />}
+                {this.state.loading ? null : <Nickname nickname={this.props.nickname} navigate={this.navigate}/>}
               </li>
               <li className="nav-item active">
                 <Link className="nav-link d-flex" to={ALERTS}>
@@ -56,16 +58,16 @@ class Header extends Component {
   }
 }
 
-const MenuItem = ({to, label, path}) => (
+const MenuItem = ({to, label, path, navigate}) => (
   <li className={"nav-item" + (path === to ? " active" : "")}>
-    <Link className="nav-link" to={to}>{label}</Link>
+    <div className="nav-link cs-pointer" onClick={() => navigate(to)}>{label}</div>
   </li>
 )
 
-const Nickname = ({nickname, onClick}) => (
-  <Link className="btn btn-outline-light" to={PROFILE} onClick={onClick}>
+const Nickname = ({nickname, navigate}) => (
+  <button className="btn btn-outline-light" type="button" onClick={() => navigate(PROFILE)}>
     {nickname.length === 0 ? 'Ingresa tu nombre' : <strong>{nickname}</strong>}
-  </Link>
+  </button>
 )
 
 const mapStateToProps = (state) => ({
