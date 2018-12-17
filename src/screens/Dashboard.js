@@ -33,7 +33,7 @@ export default class Dashboard extends Component {
     return (
       <div className="p-2">
         <ItemList items={this.state.items} onRefresh={this._fetchItems} navigate={this.navigate}/>
-        <div className="fixed-bottom d-flex justify-content-end">
+        <div>
           <button className="btn btn-primary cs-fab mr-4 mb-4" type="button" onClick={this.createOrder}>
             <i className="fal fa-plus fa-2x"></i>
           </button>
