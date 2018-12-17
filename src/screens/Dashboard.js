@@ -12,9 +12,7 @@ export default class Dashboard extends Component {
     this._fetchItems()
   }
 
-  createOrder = () => {
-    this.props.history.push(CREATE_ITEM)
-  }
+  createOrder = () => this.props.history.push(CREATE_ITEM)
 
   navigate = (to) => {
     if (to !== this.props.history.location.pathname) {
@@ -24,8 +22,7 @@ export default class Dashboard extends Component {
     }
   }
 
-  _fetchItems = () => mprestoContract
-    .getItemsByOwner(this.props.account)
+  _fetchItems = () => mprestoContract.getItemsByOwner(this.props.account)
     .then(items => this.setState({items}))
     .catch(this.props.onError)
 
@@ -33,11 +30,9 @@ export default class Dashboard extends Component {
     return (
       <div className="p-2">
         <ItemList items={this.state.items} onRefresh={this._fetchItems} navigate={this.navigate}/>
-        <div>
-          <button className="btn btn-primary cs-fab mr-4 mb-4" type="button" onClick={this.createOrder}>
-            <i className="fal fa-plus fa-2x"></i>
-          </button>
-        </div>
+        <button className="btn btn-primary cs-fab mr-4 mb-4" type="button" onClick={this.createOrder}>
+          <i className="fal fa-plus fa-2x"></i>
+        </button>
       </div>
     );
   }
