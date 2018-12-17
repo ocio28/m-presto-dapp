@@ -6,12 +6,12 @@ class MPrestoContract {
     this.contract = null
   }
 
-  init() {
-    return network().then(network => {
-      let artifact = MPresto.v1
-      this.contract = createContract(artifact.abi, MPresto.v1.networks[network].address)
-      return this
-    })
+  init = () => network().then(this.create)
+
+  create = (network) => {
+    let artifact = MPresto.v1
+    this.contract = createContract(artifact.abi, MPresto.v1.networks[network].address)
+    return this
   }
 
   getItem(_itemId) {

@@ -3,7 +3,7 @@ import {HashRouter as Router, Route} from 'react-router-dom'
 import {DASHBOARD, HEADER, CREATE_ITEM, TRANSFER_EVENTS, ALERTS, PROFILE,
   ITEM} from './utils/Routes'
 import {Dashboard, CreateItem, TransferEvents, Alerts, Profile, ItemDetail} from './screens'
-import {Header} from './components'
+import {Header, Loading} from './components'
 import {init, getAccounts} from './lib/Eth'
 import mprestoContract from './contracts/MPrestoContract'
 import './App.css';
@@ -18,15 +18,12 @@ class App extends Component {
 
   componentDidMount() {
     window.onresize = () => this.setState({width: window.innerWidth})
-    if (init()) {
-      mprestoContract.init().then(getAccounts).then(accounts => {
-        if (accounts.length === 0) return Promise.reject('No hay cuentas')
-        this.setState({account: accounts[0], loading: false, web3: true})
-      }).catch(this.onError)
-    } else {
-      this.setState({loading: false})
-      console.log('no provider, install metamask')
-    }
+    init().then(mprestoContract.init).then(getAccounts).then(this.onSuccess).catch(this.onError)
+  }
+
+  onSuccess = (accounts) => {
+    if (accounts.length === 0) return Promise.reject('No hay cuentas')
+    this.setState({account: accounts[0], loading: false, web3: true})
   }
 
   onError = (e) => {
@@ -35,7 +32,7 @@ class App extends Component {
   }
 
   render() {
-    if (this.state.loading) return null
+    if (this.state.loading) return <Loading />
     if (!this.state.web3) return <NoWeb3 />
     return (
       <Router>
@@ -63,6 +60,7 @@ const NoWeb3 = () => (
       <div className="card-body">
         MPresto requiere <a href="https://metamask.io/" target="_blank" rel="noopener noreferrer">Metamask (Escritorio) </a>
         o <a href="https://www.cipherbrowser.com/" target="_blank" rel="noopener noreferrer">Cipherbrowser (Celular)</a>
+        <button className="btn btn-primary btn-block mt-3" type="button" onClick={() => window.location.reload()}>Recargar</button>
       </div>
     </div>
   </div>

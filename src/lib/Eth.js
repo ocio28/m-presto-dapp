@@ -1,13 +1,28 @@
 import Web3 from 'web3'
 
 let web3 = null
-
+/*
 export function init() {
-  if (typeof window.web3 !== 'undefined') {
+  return new Promise((res, rej) => {
+    if (window.ethereum) {
+      web3 = new Web3(window.ethereum);
+      window.ethereum.enable().then(res).catch(rej)
+    } else if (typeof window.web3 !== 'undefined') {
+      web3 = new Web3(window.web3.currentProvider);
+      res()
+    }
+    rej()
+  })
+}*/
+export function init() {
+  if (window.ethereum) {
+    web3 = new Web3(window.ethereum);
+    return window.ethereum.enable()
+  } else if (typeof window.web3 !== 'undefined') {
     web3 = new Web3(window.web3.currentProvider);
-    return true
+    return Promise.resolve()
   }
-  return false
+  return Promise.reject('no provider, install metamask')
 }
 
 export function network() {
