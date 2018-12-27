@@ -10,8 +10,8 @@ class MPrestoContract {
 
   create = (network) => {
     let artifact = MPresto.v1
-    //this.contract = createContract(artifact.abi, MPresto.v1.networks[network].address)
-    this.contract = createContract(artifact.abi, '0x9784410e899a3d1fd64146e3a085a093cefb3c4b')
+    this.contract = createContract(artifact.abi, MPresto.v1.networks[network].address)
+    //this.contract = createContract(artifact.abi, '0x7fc09feda70d0cbc2a0705967ce1948b3c63ca15')
     return this
   }
 
